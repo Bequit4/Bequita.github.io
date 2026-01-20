@@ -28,64 +28,54 @@
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ===== Falling binary side effect ===== */
-    .binary{
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 120px;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.18;
-      background:
-        repeating-linear-gradient(
-          180deg,
-          rgba(56,189,248,0.0) 0px,
-          rgba(56,189,248,0.0) 18px,
-          rgba(56,189,248,0.55) 19px,
-          rgba(56,189,248,0.0) 20px
-        );
-      mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,
-        black 15%,
-        black 85%,
-        transparent 100%
-      );
-    }
-    .binary-left{ left: 0; }
-    .binary-right{ right: 0; }
 
-    .binary::before{
-      content:
-        "01001010100101010100101001010100101001010100101001010100101001"
-        "01010100101001010100101001010100101001010100101001010100101010"
-        "01001010100101010100101001010100101001010100101001010100101001"
-        "01010100101001010100101001010100101001010100101001010100101010";
-      position: absolute;
-      inset: 0;
-      font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
-      font-size: 14px;
-      line-height: 18px;
-      letter-spacing: 2px;
-      color: rgba(56,189,248,0.9);
-      white-space: pre-wrap;
-      transform: translateY(-50%);
-      animation: binaryFall 8s linear infinite;
-    }
-    .binary-right::before{
-      animation-duration: 11s;
-      opacity: 0.75;
-    }
-    @keyframes binaryFall{
-      from { transform: translateY(-60%); }
-      to   { transform: translateY(10%); }
-    }
-    @media (max-width: 900px){
-      .binary{ display:none; }
-    }
+  /* ===== Falling binary ===== */
+.binary{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  overflow: hidden;
+}
 
-    /* ===== Header with animated starfield ===== */
+.binary-left{ left: 0; }
+.binary-right{ right: 0; }
+
+.binary::before{
+  content:
+    "01010100101101001010100101001010101001010100101010100101001010"
+    "10100101010010101001010100101010100101001010101001010100101010"
+    "01010100101010100101001010101001010100101010100101001010101001";
+  position: absolute;
+  inset: 0;
+  font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 3px;
+  color: rgba(56,189,248,0.9);
+  white-space: pre-wrap;
+  animation: binaryFallFast 3.5s linear infinite;
+}
+
+.binary-right::before{
+  animation-duration: 4.5s;
+  opacity: 0.75;
+}
+
+@keyframes binaryFallFast{
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100%); }
+}
+
+@media (max-width: 900px){
+  .binary{ display:none; }
+}
+
+
+    /* ===== Header animated ===== */
     header{
       position: relative;
       overflow: hidden;
@@ -403,7 +393,7 @@
 
         <div class="card">
           <div class="qr" style="margin-bottom:16px;">
-            <img src="assets/qr/linkedin.png" alt="LinkedIn QR Code" />
+            <img src="assets/qr/linkedin.jpg" alt="LinkedIn QR Code" />
             <div>
               <p style="margin:0;"><strong>LinkedIn QR</strong></p>
               <p class="muted small" style="margin:6px 0 0 0;">Scan to open my LinkedIn profile.</p>
