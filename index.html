@@ -23,75 +23,94 @@
       line-height: 1.6;
     }
 
-    /* ===== Header with animated starfield ===== */
+    /* ===== Header with animated starfield (more obvious) ===== */
     header {
       position: relative;
       overflow: hidden;
-      padding: 46px 20px;
+      padding: 52px 20px;
       text-align: center;
       border-bottom: 2px solid var(--border);
-      background: radial-gradient(1200px 500px at 50% 0%, rgba(56,189,248,0.10), transparent 55%),
-                  linear-gradient(180deg, #020617, #020617);
+      background:
+        radial-gradient(1200px 520px at 50% 0%, rgba(56,189,248,0.14), transparent 58%),
+        linear-gradient(180deg, #020617, #020617);
     }
 
-    /* Layer 1: small stars */
-    header::before{
-      content:"";
+    /* Star layer: uses tiny repeated dots so it looks like "real" stars */
+    header .stars,
+    header .stars2{
       position:absolute;
       inset:-200px;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9) 50%, transparent 51%),
-        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.7) 50%, transparent 51%),
-        radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,.8) 50%, transparent 51%),
-        radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.6) 50%, transparent 51%),
-        radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,.7) 50%, transparent 51%),
-        radial-gradient(1px 1px at 90% 90%, rgba(255,255,255,.5) 50%, transparent 51%),
-        radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,.6) 50%, transparent 51%);
-      opacity: .55;
-      animation: starsDrift 22s linear infinite;
+      background-repeat: repeat;
       pointer-events:none;
+      z-index: 0;
     }
 
-    /* Layer 2: faint dust */
-    header::after{
-      content:"";
+    header .stars{
+      background-image:
+        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.9) 60%, transparent 61%),
+        radial-gradient(1px 1px at 140px 80px, rgba(255,255,255,.7) 60%, transparent 61%),
+        radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,.8) 60%, transparent 61%),
+        radial-gradient(1px 1px at 200px 160px, rgba(255,255,255,.6) 60%, transparent 61%),
+        radial-gradient(2px 2px at 40px 170px, rgba(255,255,255,.55) 60%, transparent 61%);
+      background-size: 240px 200px;
+      opacity: .65;
+      animation: starsDrift 18s linear infinite;
+    }
+
+    header .stars2{
+      background-image:
+        radial-gradient(1px 1px at 60px 40px, rgba(255,255,255,.55) 60%, transparent 61%),
+        radial-gradient(2px 2px at 180px 120px, rgba(255,255,255,.35) 60%, transparent 61%),
+        radial-gradient(1px 1px at 210px 40px, rgba(255,255,255,.45) 60%, transparent 61%),
+        radial-gradient(1px 1px at 110px 180px, rgba(255,255,255,.4) 60%, transparent 61%);
+      background-size: 260px 220px;
+      opacity: .35;
+      animation: starsDrift2 28s linear infinite;
+    }
+
+    header .nebula{
       position:absolute;
-      inset:-300px;
+      inset:-250px;
       background:
-        radial-gradient(600px 240px at 30% 10%, rgba(56,189,248,.08), transparent 60%),
-        radial-gradient(700px 280px at 70% 30%, rgba(255,255,255,.05), transparent 65%),
-        radial-gradient(500px 220px at 60% 0%, rgba(148,163,184,.05), transparent 60%);
-      animation: nebulaShift 16s ease-in-out infinite alternate;
+        radial-gradient(700px 280px at 20% 10%, rgba(56,189,248,.12), transparent 65%),
+        radial-gradient(800px 320px at 80% 30%, rgba(255,255,255,.06), transparent 70%),
+        radial-gradient(650px 260px at 60% 0%, rgba(148,163,184,.06), transparent 68%);
+      opacity: .85;
+      animation: nebulaShift 14s ease-in-out infinite alternate;
       pointer-events:none;
+      z-index: 0;
     }
 
     @keyframes starsDrift{
       from { transform: translateY(0); }
-      to   { transform: translateY(160px); }
+      to   { transform: translateY(180px); }
+    }
+    @keyframes starsDrift2{
+      from { transform: translateY(0); }
+      to   { transform: translateY(260px); }
     }
     @keyframes nebulaShift{
-      from { transform: translateX(-10px) translateY(0); }
-      to   { transform: translateX(10px) translateY(6px); }
+      from { transform: translateX(-14px) translateY(0); }
+      to   { transform: translateX(14px) translateY(8px); }
+    }
+
+    header h1, header p, nav{
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
-      position: relative;
-      z-index: 1;
       margin: 0;
       font-size: 2.2rem;
       letter-spacing: 0.4px;
     }
 
     header p {
-      position: relative;
-      z-index: 1;
       margin: 10px 0 0 0;
       color: var(--muted);
     }
 
     nav{
-      position: relative;
-      z-index: 1;
       margin-top: 16px;
       display:flex;
       gap:10px;
@@ -185,6 +204,14 @@
       background: #0b1220;
     }
 
+    ul.tight{
+      margin: 0;
+      padding-left: 18px;
+    }
+    ul.tight li{
+      margin: 8px 0;
+    }
+
     footer {
       text-align: center;
       padding: 30px 10px;
@@ -198,6 +225,10 @@
 <body>
 
 <header>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="nebula"></div>
+
   <h1>Miriam Ferreira</h1>
   <p>Cybersecurity Student | Smart Technologies Background</p>
 
@@ -249,20 +280,15 @@
 
   <div class="card">
     <p class="project-title">Project 1 — (Add your title)</p>
-    <p class="muted small">
-      What it does, tools used, and what you learned (keep it concrete).
-    </p>
+    <p class="muted small">What it does, tools used, and what you learned.</p>
     <div class="btnrow">
       <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">Live demo (optional)</a>
     </div>
   </div>
 
   <div class="card">
     <p class="project-title">Project 2 — (Add your title)</p>
-    <p class="muted small">
-      Short description. Add screenshots later in /assets/img and show them here.
-    </p>
+    <p class="muted small">Short description. Add screenshots later in /assets/img.</p>
     <div class="btnrow">
       <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
     </div>
@@ -272,7 +298,7 @@
 <section id="diplomas">
   <h2>Diplomas</h2>
   <div class="card">
-    <ul class="small" style="margin:0; padding-left: 18px;">
+    <ul class="tight small">
       <li>DT Diploma — Electrotechnical Division, Smart Technologies Section (Robotics & Automation)</li>
     </ul>
   </div>
@@ -281,9 +307,15 @@
 <section id="certs">
   <h2>Certifications</h2>
   <div class="card">
-    <ul class="small" style="margin:0; padding-left: 18px;">
-      <li>Microsoft Word Associate Certification</li>
-      <li>Microsoft PowerPoint Associate Certification</li>
+    <ul class="tight small">
+      <li>
+        Microsoft Word (Expert) — Badge
+        • <a href="https://www.credly.com/badges/7e1a77ee-0241-4753-92db-245c201aa2ee/public_url" target="_blank" rel="noopener">Verify</a>
+      </li>
+      <li>
+        Microsoft PowerPoint Associate — Badge
+        • <a href="https://www.credly.com/badges/4030565d-268b-446b-8720-9fad8664cb9a/public_url" target="_blank" rel="noopener">Verify</a>
+      </li>
     </ul>
   </div>
 </section>
@@ -318,22 +350,44 @@
       <p class="muted small" style="margin:6px 0 0 0;">
         <a href="https://github.com/Bequit4" target="_blank" rel="noopener">github.com/Bequit4</a>
       </p>
+
+      <p class="small" style="margin:14px 0 0 0;"><strong>LinkedIn</strong></p>
+      <p class="muted small" style="margin:6px 0 0 0;">
+        <a href="https://www.linkedin.com/in/miriam-ferreira-3308a4387/" target="_blank" rel="noopener">
+          linkedin.com/in/miriam-ferreira-3308a4387
+        </a>
+      </p>
+
+      <p class="small" style="margin:14px 0 0 0;"><strong>TryHackMe</strong></p>
+      <p class="muted small" style="margin:6px 0 0 0;">
+        <a href="https://tryhackme.com/p/MiriamFerreira" target="_blank" rel="noopener">
+          tryhackme.com/p/MiriamFerreira
+        </a>
+      </p>
     </div>
 
     <div class="card">
-      <div class="qr">
+      <div class="qr" style="margin-bottom:16px;">
         <img src="assets/qr/linkedin.jpg" alt="LinkedIn QR Code" />
         <div>
-          <p style="margin:0;"><strong>LinkedIn</strong></p>
-          <p class="muted small" style="margin:6px 0 0 0;">
-            Scan to open my LinkedIn profile.
-          </p>
-          <p class="small" style="margin:10px 0 0 0;">
-            <!-- Replace this with YOUR real LinkedIn URL -->
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener">Open LinkedIn</a>
-          </p>
+          <p style="margin:0;"><strong>LinkedIn QR</strong></p>
+          <p class="muted small" style="margin:6px 0 0 0;">Scan to open my LinkedIn profile.</p>
         </div>
       </div>
+
+      <div class="qr">
+        <img src="assets/qr/tryhackme.jpg" alt="TryHackMe QR Code" />
+        <div>
+          <p style="margin:0;"><strong>TryHackMe QR</strong></p>
+          <p class="muted small" style="margin:6px 0 0 0;">Scan to open my TryHackMe profile.</p>
+        </div>
+      </div>
+
+      <p class="muted small" style="margin-top:14px;">
+        Make sure the filenames match exactly:
+        <br/>assets/qr/linkedin.jpg
+        <br/>assets/qr/tryhackme.jpg
+      </p>
     </div>
   </div>
 </section>
