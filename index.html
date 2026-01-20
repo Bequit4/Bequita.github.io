@@ -28,11 +28,10 @@
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-/* ===== Matrix rain ===== */
 .matrix{
   position: fixed;
   top: 0;
-  bottom: 0;
+  height: 100vh;   
   width: 160px;
   z-index: 0;
   pointer-events: none;
@@ -45,6 +44,7 @@
 @media (max-width: 900px){
   .matrix{ display: none; }
 }
+
 
     /* ===== Header animated ===== */
     header{
@@ -226,6 +226,7 @@
       canvas.width = canvas.offsetWidth;
       canvas.height = window.innerHeight;
     }
+
     resize();
     window.addEventListener("resize", resize);
 
@@ -257,6 +258,7 @@
   matrixRain("matrix-left");
   matrixRain("matrix-right");
 </script>
+
 
 <body>
   <canvas id="matrix-left" class="matrix"></canvas>
