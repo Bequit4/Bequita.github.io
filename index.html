@@ -28,52 +28,23 @@
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-
-  /* ===== Falling binary ===== */
-.binary{
+/* ===== Matrix rain ===== */
+.matrix{
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 140px;
-  pointer-events: none;
+  width: 160px;
   z-index: 0;
+  pointer-events: none;
   opacity: 0.35;
-  overflow: hidden;
 }
 
-.binary-left{ left: 0; }
-.binary-right{ right: 0; }
-
-.binary::before{
-  content:
-    "01010100101101001010100101001010101001010100101010100101001010"
-    "10100101010010101001010100101010100101001010101001010100101010"
-    "01010100101010100101001010101001010100101010100101001010101001";
-  position: absolute;
-  inset: 0;
-  font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: 3px;
-  color: rgba(56,189,248,0.9);
-  white-space: pre-wrap;
-  animation: binaryFallFast 3.5s linear infinite;
-}
-
-.binary-right::before{
-  animation-duration: 4.5s;
-  opacity: 0.75;
-}
-
-@keyframes binaryFallFast{
-  from { transform: translateY(-100%); }
-  to   { transform: translateY(100%); }
-}
+#matrix-left{ left: 0; }
+#matrix-right{ right: 0; }
 
 @media (max-width: 900px){
-  .binary{ display:none; }
+  .matrix{ display: none; }
 }
-
 
     /* ===== Header animated ===== */
     header{
@@ -246,7 +217,51 @@
   </style>
 </head>
 
+<script>
+  function matrixRain(canvasId){
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext("2d");
+
+    function resize(){
+      canvas.width = canvas.offsetWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw(){
+      ctx.fillStyle = "rgba(15, 23, 42, 0.08)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "rgba(56,189,248,0.9)";
+      ctx.font = fontSize + "px monospace";
+
+      for(let i = 0; i < drops.length; i++){
+        const text = Math.random() > 0.5 ? "1" : "0";
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+  }
+
+  matrixRain("matrix-left");
+  matrixRain("matrix-right");
+</script>
+
 <body>
+  <canvas id="matrix-left" class="matrix"></canvas>
+  <canvas id="matrix-right" class="matrix"></canvas>
+
   <!-- Side binary overlays -->
   <div class="binary binary-left" aria-hidden="true"></div>
   <div class="binary binary-right" aria-hidden="true"></div>
