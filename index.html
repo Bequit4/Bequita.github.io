@@ -23,25 +23,75 @@
       line-height: 1.6;
     }
 
+    /* ===== Header with animated starfield ===== */
     header {
-      background: var(--panel);
-      padding: 42px 20px;
+      position: relative;
+      overflow: hidden;
+      padding: 46px 20px;
       text-align: center;
       border-bottom: 2px solid var(--border);
+      background: radial-gradient(1200px 500px at 50% 0%, rgba(56,189,248,0.10), transparent 55%),
+                  linear-gradient(180deg, #020617, #020617);
+    }
+
+    /* Layer 1: small stars */
+    header::before{
+      content:"";
+      position:absolute;
+      inset:-200px;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9) 50%, transparent 51%),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.7) 50%, transparent 51%),
+        radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,.8) 50%, transparent 51%),
+        radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.6) 50%, transparent 51%),
+        radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,.7) 50%, transparent 51%),
+        radial-gradient(1px 1px at 90% 90%, rgba(255,255,255,.5) 50%, transparent 51%),
+        radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,.6) 50%, transparent 51%);
+      opacity: .55;
+      animation: starsDrift 22s linear infinite;
+      pointer-events:none;
+    }
+
+    /* Layer 2: faint dust */
+    header::after{
+      content:"";
+      position:absolute;
+      inset:-300px;
+      background:
+        radial-gradient(600px 240px at 30% 10%, rgba(56,189,248,.08), transparent 60%),
+        radial-gradient(700px 280px at 70% 30%, rgba(255,255,255,.05), transparent 65%),
+        radial-gradient(500px 220px at 60% 0%, rgba(148,163,184,.05), transparent 60%);
+      animation: nebulaShift 16s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    @keyframes starsDrift{
+      from { transform: translateY(0); }
+      to   { transform: translateY(160px); }
+    }
+    @keyframes nebulaShift{
+      from { transform: translateX(-10px) translateY(0); }
+      to   { transform: translateX(10px) translateY(6px); }
     }
 
     header h1 {
+      position: relative;
+      z-index: 1;
       margin: 0;
       font-size: 2.2rem;
       letter-spacing: 0.4px;
     }
 
     header p {
+      position: relative;
+      z-index: 1;
       margin: 10px 0 0 0;
       color: var(--muted);
     }
 
     nav{
+      position: relative;
+      z-index: 1;
       margin-top: 16px;
       display:flex;
       gap:10px;
@@ -149,12 +199,13 @@
 
 <header>
   <h1>Miriam Ferreira</h1>
-  <p>Cybersecurity Student | IT & Smart Technologies Background</p>
+  <p>Cybersecurity Student | Smart Technologies Background</p>
 
   <nav>
     <a href="#about">About</a>
     <a href="#education">Education</a>
     <a href="#projects">Projects</a>
+    <a href="#diplomas">Diplomas</a>
     <a href="#certs">Certifications</a>
     <a href="#cv">CV</a>
     <a href="#contact">Contact</a>
@@ -216,23 +267,23 @@
       <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
     </div>
   </div>
+</section>
 
-  <p class="muted small">
-    Tip: 2–4 finished projects with screenshots beats 10 unfinished ideas.
-  </p>
+<section id="diplomas">
+  <h2>Diplomas</h2>
+  <div class="card">
+    <ul class="small" style="margin:0; padding-left: 18px;">
+      <li>DT Diploma — Electrotechnical Division, Smart Technologies Section (Robotics & Automation)</li>
+    </ul>
+  </div>
 </section>
 
 <section id="certs">
   <h2>Certifications</h2>
-
   <div class="card">
     <ul class="small" style="margin:0; padding-left: 18px;">
       <li>Microsoft Word Associate Certification</li>
       <li>Microsoft PowerPoint Associate Certification</li>
-      <li>
-        DT Diploma — Electrotechnical Division, Smart Technologies Section
-        (Robotics & Automation)
-      </li>
     </ul>
   </div>
 </section>
@@ -250,10 +301,6 @@
       <a class="btn" href="assets/cv/CV_FR.pdf" target="_blank" rel="noopener">Open CV</a>
       <a class="btn" href="assets/cv/CV_FR.pdf" download>Download CV</a>
     </div>
-
-    <p class="muted small" style="margin-top:10px;">
-      If the PDF doesn’t preview on mobile, the download button still works.
-    </p>
   </div>
 </section>
 
@@ -264,8 +311,7 @@
     <div class="card">
       <p class="small" style="margin:0;"><strong>Email</strong></p>
       <p class="muted small" style="margin:6px 0 0 0;">
-        <!-- Replace with what you WANT public -->
-        your-email@example.com
+        <a href="mailto:miriambecaferreira@gmail.com">miriambecaferreira@gmail.com</a>
       </p>
 
       <p class="small" style="margin:14px 0 0 0;"><strong>GitHub</strong></p>
@@ -282,8 +328,8 @@
           <p class="muted small" style="margin:6px 0 0 0;">
             Scan to open my LinkedIn profile.
           </p>
-          <!-- Replace this link with your real LinkedIn URL -->
           <p class="small" style="margin:10px 0 0 0;">
+            <!-- Replace this with YOUR real LinkedIn URL -->
             <a href="https://www.linkedin.com/" target="_blank" rel="noopener">Open LinkedIn</a>
           </p>
         </div>
