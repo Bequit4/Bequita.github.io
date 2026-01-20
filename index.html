@@ -368,23 +368,30 @@ function matrixRain(id){
   const columns = Math.floor(canvas.width / fontSize);
   const drops = Array(columns).fill(1);
 
-  function draw(){
-    ctx.fillStyle = "rgba(15,23,42,0.15)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+ function draw(){
+  const headerHeight = document.querySelector("header").offsetHeight;
 
-    ctx.fillStyle = "rgba(56,189,248,0.9)";
-    ctx.font = fontSize + "px monospace";
+  ctx.fillStyle = "rgba(15,23,42,0.15)";
+  ctx.fillRect(0, headerHeight, canvas.width, canvas.height);
 
-    for(let i=0;i<drops.length;i++){
+  ctx.fillStyle = "rgba(56,189,248,0.9)";
+  ctx.font = fontSize + "px monospace";
+
+  for(let i=0;i<drops.length;i++){
+    const y = drops[i] * fontSize + headerHeight;
+
+    if(y > headerHeight){
       const text = Math.random() > 0.5 ? "1" : "0";
-      ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-
-      if(drops[i]*fontSize > canvas.height && Math.random() > 0.975){
-        drops[i] = 0;
-      }
-      drops[i]++;
+      ctx.fillText(text, i * fontSize, y);
     }
+
+    if(y > canvas.height && Math.random() > 0.975){
+      drops[i] = 0;
+    }
+    drops[i]++;
   }
+}
+
 
   setInterval(draw, 50);
 }
