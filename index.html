@@ -3,74 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bequita | Portfolio</title>
+  <title>Miriam Ferreira | Portfolio</title>
 
   <style>
+    :root{
+      --bg:#0f172a;
+      --panel:#020617;
+      --border:#1e293b;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --link:#38bdf8;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #0f172a;
-      color: #e5e7eb;
+      background-color: var(--bg);
+      color: var(--text);
       line-height: 1.6;
     }
 
     header {
-      background: #020617;
-      padding: 40px 20px;
+      background: var(--panel);
+      padding: 42px 20px;
       text-align: center;
-      border-bottom: 2px solid #1e293b;
+      border-bottom: 2px solid var(--border);
     }
 
     header h1 {
       margin: 0;
       font-size: 2.2rem;
+      letter-spacing: 0.4px;
     }
 
     header p {
-      margin-top: 10px;
-      color: #94a3b8;
+      margin: 10px 0 0 0;
+      color: var(--muted);
     }
 
+    nav{
+      margin-top: 16px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    nav a{
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration:none;
+      font-size: 0.95rem;
+      background: rgba(255,255,255,0.02);
+    }
+    nav a:hover{ border-color: #334155; }
+
     section {
-      max-width: 900px;
+      max-width: 960px;
       margin: 40px auto;
       padding: 0 20px;
     }
 
     h2 {
-      border-bottom: 2px solid #1e293b;
+      border-bottom: 2px solid var(--border);
       padding-bottom: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       font-size: 1.5rem;
     }
 
-    .card {
-      background: #020617;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #1e293b;
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr 1fr;
     }
+    @media (max-width: 850px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--panel);
+      padding: 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .muted{ color: var(--muted); }
+    .small{ font-size: 0.95rem; }
 
     .project-title {
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
+      margin: 0 0 6px 0;
     }
 
     a {
-      color: #38bdf8;
+      color: var(--link);
       text-decoration: none;
     }
+    a:hover { text-decoration: underline; }
 
-    a:hover {
-      text-decoration: underline;
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .btn{
+      display:inline-block;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      text-decoration:none;
+      font-size: 0.95rem;
+    }
+    .btn:hover{ background: rgba(255,255,255,0.06); text-decoration:none; }
+
+    .qr{
+      display:flex;
+      gap: 16px;
+      align-items:center;
+    }
+    .qr img{
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
     }
 
     footer {
       text-align: center;
       padding: 30px 10px;
       color: #64748b;
-      border-top: 1px solid #1e293b;
+      border-top: 1px solid var(--border);
       margin-top: 60px;
     }
   </style>
@@ -79,98 +148,157 @@
 <body>
 
 <header>
-  <h1>Bequita</h1>
-  <p>Cybersecurity Student | Aspiring Security Analyst</p>
+  <h1>Miriam Ferreira</h1>
+  <p>Cybersecurity Student | IT & Smart Technologies Background</p>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#certs">Certifications</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<section>
+<section id="about">
   <h2>About Me</h2>
   <div class="card">
     <p>
-      Cybersecurity student with a strong interest in system security, networking,
-      and web technologies. Currently building hands-on projects to strengthen
-      practical skills and preparing for future internships and professional roles.
+      I am currently studying Cybersecurity after several years focused on industrial programming.
+      I’m looking to deepen my academic and personal knowledge in the IT world, and I aim to continue
+      progressing toward software engineering studies.
+    </p>
+    <p class="muted small" style="margin-top:10px;">
+      Interests: security fundamentals, networks, automation, and hands-on labs.
     </p>
   </div>
 </section>
 
-<section>
+<section id="education">
   <h2>Education</h2>
-  <div class="card">
-    <p><strong>Degree / Program Name</strong></p>
-    <p>Institution Name — 202X to 202X</p>
-    <p>
-      Relevant coursework: Networking, Operating Systems, Web Development,
-      Security Fundamentals.
-    </p>
+
+  <div class="grid">
+    <div class="card">
+      <p style="margin:0;"><strong>BTS in Cybersecurity</strong></p>
+      <p class="muted" style="margin:6px 0 0 0;">Lycée Guillaume Kroll</p>
+      <p class="muted small" style="margin:6px 0 0 0;">09/2025 — Present</p>
+    </div>
+
+    <div class="card">
+      <p style="margin:0;"><strong>Smart Technologies Technician</strong></p>
+      <p class="muted" style="margin:6px 0 0 0;">Lycée Guillaume Kroll</p>
+      <p class="muted small" style="margin:6px 0 0 0;">09/2020 — 06/2025</p>
+    </div>
   </div>
 </section>
 
-<section>
+<section id="projects">
   <h2>Projects</h2>
 
   <div class="card">
-    <p class="project-title">Project Title 1</p>
-    <p>
-      Short description of what the project does, tools used,
-      and what you learned.
+    <p class="project-title">Project 1 — (Add your title)</p>
+    <p class="muted small">
+      What it does, tools used, and what you learned (keep it concrete).
     </p>
-    <p>
-      <a href="https://github.com/yourusername/project1" target="_blank">GitHub Repository</a>
-    </p>
+    <div class="btnrow">
+      <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
+      <a class="btn" href="#" target="_blank" rel="noopener">Live demo (optional)</a>
+    </div>
   </div>
 
   <div class="card">
-    <p class="project-title">Project Title 2</p>
-    <p>
-      Short description of the project and its purpose.
+    <p class="project-title">Project 2 — (Add your title)</p>
+    <p class="muted small">
+      Short description. Add screenshots later in /assets/img and show them here.
     </p>
-    <p>
-      <a href="https://github.com/yourusername/project2" target="_blank">GitHub Repository</a>
-    </p>
+    <div class="btnrow">
+      <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
+    </div>
   </div>
 
+  <p class="muted small">
+    Tip: 2–4 finished projects with screenshots beats 10 unfinished ideas.
+  </p>
 </section>
 
-<section>
+<section id="certs">
   <h2>Certifications</h2>
+
   <div class="card">
-    <p>Certification Name — Issuer (Year)</p>
-    <p>Another Certification — Issuer (Year)</p>
+    <ul class="small" style="margin:0; padding-left: 18px;">
+      <li>Microsoft Word Associate Certification</li>
+      <li>Microsoft PowerPoint Associate Certification</li>
+      <li>
+        DT Diploma — Electrotechnical Division, Smart Technologies Section
+        (Robotics & Automation)
+      </li>
+    </ul>
   </div>
 </section>
 
-<section>
+<section id="cv">
   <h2>Curriculum Vitae</h2>
+
   <div class="card">
-    <p>
-      <a href="assets/cv/CV.pdf" target="_blank">Download my CV (PDF)</a>
+    <p class="small">
+      French CV (current): <a href="assets/cv/CV_FR.pdf" target="_blank" rel="noopener">Open / Download</a><br/>
+      English CV (coming soon): <span class="muted">assets/cv/CV_EN.pdf</span>
+    </p>
+
+    <div class="btnrow">
+      <a class="btn" href="assets/cv/CV_FR.pdf" target="_blank" rel="noopener">Open CV</a>
+      <a class="btn" href="assets/cv/CV_FR.pdf" download>Download CV</a>
+    </div>
+
+    <p class="muted small" style="margin-top:10px;">
+      If the PDF doesn’t preview on mobile, the download button still works.
     </p>
   </div>
 </section>
 
-<section>
+<section id="contact">
   <h2>Contact</h2>
-  <div class="card">
-    <p>Email: your-email@example.com</p>
-    <p>
-      GitHub:
-      <a href="https://github.com/yourusername" target="_blank">
-        github.com/yourusername
-      </a>
-    </p>
-    <p>
-      LinkedIn:
-      <a href="https://linkedin.com/in/yourprofile" target="_blank">
-        linkedin.com/in/yourprofile
-      </a>
-    </p>
+
+  <div class="grid">
+    <div class="card">
+      <p class="small" style="margin:0;"><strong>Email</strong></p>
+      <p class="muted small" style="margin:6px 0 0 0;">
+        <!-- Replace with what you WANT public -->
+        your-email@example.com
+      </p>
+
+      <p class="small" style="margin:14px 0 0 0;"><strong>GitHub</strong></p>
+      <p class="muted small" style="margin:6px 0 0 0;">
+        <a href="https://github.com/Bequit4" target="_blank" rel="noopener">github.com/Bequit4</a>
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="qr">
+        <img src="assets/qr/linkedin.jpg" alt="LinkedIn QR Code" />
+        <div>
+          <p style="margin:0;"><strong>LinkedIn</strong></p>
+          <p class="muted small" style="margin:6px 0 0 0;">
+            Scan to open my LinkedIn profile.
+          </p>
+          <!-- Replace this link with your real LinkedIn URL -->
+          <p class="small" style="margin:10px 0 0 0;">
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener">Open LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
-  © 2026 Bequita — GitHub Pages Portfolio
+  © <span id="year"></span> Miriam Ferreira — GitHub Pages Portfolio
 </footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
