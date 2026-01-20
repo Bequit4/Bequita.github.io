@@ -17,36 +17,35 @@
 
     *{ box-sizing: border-box; }
 
-    body {
-      margin: 0;
+    body{
+      margin:0;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height:1.6;
     }
 
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a{ color: var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
 
-.matrix{
-  position: fixed;
-  top: 0;
-  height: 100vh;   
-  width: 160px;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.35;
-}
+    /* ===== MATRIX RAIN (WORKING) ===== */
+    .matrix{
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 160px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+    }
+    #matrix-left{ left:0; }
+    #matrix-right{ right:0; }
 
-#matrix-left{ left: 0; }
-#matrix-right{ right: 0; }
+    @media (max-width: 900px){
+      .matrix{ display:none; }
+    }
 
-@media (max-width: 900px){
-  .matrix{ display: none; }
-}
-
-
-    /* ===== Header animated ===== */
+    /* ===== HEADER / STARFIELD ===== */
     header{
       position: relative;
       overflow: hidden;
@@ -57,384 +56,344 @@
         radial-gradient(1200px 520px at 50% 0%, rgba(56,189,248,0.14), transparent 58%),
         linear-gradient(180deg, #020617, #020617);
     }
+
     header .stars,
     header .stars2{
       position:absolute;
       inset:-200px;
-      background-repeat: repeat;
       pointer-events:none;
-      z-index: 0;
+      z-index:0;
+      background-repeat:repeat;
     }
+
     header .stars{
       background-image:
         radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.9) 60%, transparent 61%),
         radial-gradient(1px 1px at 140px 80px, rgba(255,255,255,.7) 60%, transparent 61%),
-        radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,.8) 60%, transparent 61%),
-        radial-gradient(1px 1px at 200px 160px, rgba(255,255,255,.55) 60%, transparent 61%);
-      background-size: 260px 220px;
-      opacity: .6;
+        radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,.8) 60%, transparent 61%);
+      background-size:260px 220px;
       animation: starsDrift 18s linear infinite;
+      opacity:.6;
     }
+
     header .stars2{
       background-image:
         radial-gradient(1px 1px at 60px 40px, rgba(255,255,255,.5) 60%, transparent 61%),
-        radial-gradient(2px 2px at 180px 120px, rgba(255,255,255,.35) 60%, transparent 61%),
-        radial-gradient(1px 1px at 220px 50px, rgba(255,255,255,.35) 60%, transparent 61%);
-      background-size: 320px 260px;
-      opacity: .35;
+        radial-gradient(2px 2px at 180px 120px, rgba(255,255,255,.35) 60%, transparent 61%);
+      background-size:320px 260px;
       animation: starsDrift2 28s linear infinite;
-    }
-    @keyframes starsDrift{
-      from { transform: translateY(0); }
-      to   { transform: translateY(180px); }
-    }
-    @keyframes starsDrift2{
-      from { transform: translateY(0); }
-      to   { transform: translateY(260px); }
+      opacity:.35;
     }
 
-    header h1, header p, nav{
-      position: relative;
-      z-index: 2;
+    @keyframes starsDrift{
+      from{ transform:translateY(0); }
+      to{ transform:translateY(180px); }
     }
+    @keyframes starsDrift2{
+      from{ transform:translateY(0); }
+      to{ transform:translateY(260px); }
+    }
+
+    header h1,
+    header p,
+    nav{
+      position:relative;
+      z-index:2;
+    }
+
     header h1{
-      margin: 0;
-      font-size: 2.25rem;
-      letter-spacing: 0.4px;
+      margin:0;
+      font-size:2.3rem;
     }
+
     header p{
-      margin: 10px 0 0 0;
-      color: var(--muted);
+      margin:10px 0 0;
+      color:var(--muted);
     }
 
     nav{
-      margin-top: 16px;
+      margin-top:16px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       justify-content:center;
     }
-    nav a{
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text);
-      text-decoration:none;
-      font-size: 0.95rem;
-      background: rgba(255,255,255,0.02);
-    }
-    nav a:hover{ border-color: #334155; text-decoration:none; }
 
-    /* ===== Main layout ===== */
+    nav a{
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      color:var(--text);
+      background:rgba(255,255,255,0.02);
+      font-size:.95rem;
+    }
+
+    /* ===== MAIN CONTENT ===== */
     main, footer{
-      position: relative;
-      z-index: 2; /* keep content above binary */
+      position:relative;
+      z-index:2;
     }
 
     section{
-      max-width: 980px;
-      margin: 40px auto;
-      padding: 0 20px;
+      max-width:980px;
+      margin:40px auto;
+      padding:0 20px;
     }
 
     h2{
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 8px;
-      margin-bottom: 18px;
-      font-size: 1.5rem;
+      border-bottom:2px solid var(--border);
+      padding-bottom:8px;
+      margin-bottom:18px;
+      font-size:1.5rem;
     }
 
     .grid{
       display:grid;
-      gap: 18px;
-      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      grid-template-columns:1fr 1fr;
     }
-    @media (max-width: 850px){
-      .grid{ grid-template-columns: 1fr; }
+
+    @media(max-width:850px){
+      .grid{ grid-template-columns:1fr; }
     }
 
     .card{
-      background: var(--panel);
-      padding: 18px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      background:var(--panel);
+      padding:18px;
+      border-radius:10px;
+      border:1px solid var(--border);
     }
 
-    .muted{ color: var(--muted); }
-    .small{ font-size: 0.95rem; }
+    .muted{ color:var(--muted); }
+    .small{ font-size:.95rem; }
+
+    .project-title{
+      font-weight:bold;
+      font-size:1.1rem;
+      margin-bottom:6px;
+    }
 
     .btnrow{
       display:flex;
       gap:10px;
+      margin-top:10px;
       flex-wrap:wrap;
-      margin-top: 10px;
     }
-    .btn{
-      display:inline-block;
-      padding: 9px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      text-decoration:none;
-      font-size: 0.95rem;
-    }
-    .btn:hover{ background: rgba(255,255,255,0.06); text-decoration:none; }
 
-    .project-title{
-      font-weight: bold;
-      font-size: 1.08rem;
-      margin: 0 0 6px 0;
+    .btn{
+      padding:9px 12px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+      color:var(--text);
+      font-size:.95rem;
     }
 
     ul.tight{
-      margin: 0;
-      padding-left: 18px;
+      margin:0;
+      padding-left:18px;
     }
-    ul.tight li{ margin: 8px 0; }
+    ul.tight li{ margin:8px 0; }
 
     .qr{
       display:flex;
-      gap: 16px;
+      gap:16px;
       align-items:center;
     }
     .qr img{
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #0b1220;
+      width:120px;
+      height:120px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#0b1220;
     }
 
     footer{
       text-align:center;
-      padding: 30px 10px;
       color:#64748b;
+      padding:30px 10px;
       border-top:1px solid var(--border);
       margin-top:60px;
     }
   </style>
 </head>
 
+<body>
+
+<!-- MATRIX CANVASES -->
+<canvas id="matrix-left" class="matrix"></canvas>
+<canvas id="matrix-right" class="matrix"></canvas>
+
+<header>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+
+  <h1>Miriam Ferreira</h1>
+  <p>Cybersecurity Student | Smart Technologies Background</p>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#diplomas">Diplomas</a>
+    <a href="#certs">Certifications</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section id="about">
+  <h2>About Me</h2>
+  <div class="card">
+    <p>
+      I am currently studying Cybersecurity after several years focused on industrial programming.
+      I’m looking to deepen my academic and personal knowledge in the IT world, and I aim to continue
+      progressing toward software engineering studies.
+    </p>
+    <p class="muted small">
+      Interests: security fundamentals, networks, automation, and hands-on labs.
+    </p>
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <div class="grid">
+    <div class="card">
+      <strong>BTS in Cybersecurity</strong><br>
+      <span class="muted">Lycée Guillaume Kroll</span><br>
+      <span class="muted small">09/2025 — Present</span>
+    </div>
+    <div class="card">
+      <strong>Smart Technologies Technician</strong><br>
+      <span class="muted">Lycée Guillaume Kroll</span><br>
+      <span class="muted small">09/2020 — 06/2025</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="card">
+    <div class="project-title">Project Placeholder</div>
+    <p class="muted small">Add your projects here with GitHub links.</p>
+    <div class="btnrow">
+      <a class="btn" href="https://github.com/Bequit4" target="_blank">Repository</a>
+    </div>
+  </div>
+</section>
+
+<section id="diplomas">
+  <h2>Diplomas</h2>
+  <div class="card">
+    <ul class="tight small">
+      <li>DT Diploma — Electrotechnical Division, Smart Technologies (Robotics & Automation)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="certs">
+  <h2>Certifications</h2>
+  <div class="card">
+    <ul class="tight small">
+      <li>
+        Microsoft Word (Expert) —
+        <a href="https://www.credly.com/badges/7e1a77ee-0241-4753-92db-245c201aa2ee/public_url" target="_blank">Verify</a>
+      </li>
+      <li>
+        Microsoft PowerPoint Associate —
+        <a href="https://www.credly.com/badges/4030565d-268b-446b-8720-9fad8664cb9a/public_url" target="_blank">Verify</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="cv">
+  <h2>Curriculum Vitae</h2>
+  <div class="card">
+    <a class="btn" href="assets/cv/CV_FR.pdf" target="_blank">Open CV (FR)</a>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="grid">
+    <div class="card">
+      Email:
+      <a href="mailto:miriambecaferreira@gmail.com">miriambecaferreira@gmail.com</a><br><br>
+      GitHub:
+      <a href="https://github.com/Bequit4" target="_blank">github.com/Bequit4</a><br><br>
+      LinkedIn:
+      <a href="https://www.linkedin.com/in/miriam-ferreira-3308a4387/" target="_blank">Profile</a><br><br>
+      TryHackMe:
+      <a href="https://tryhackme.com/p/MiriamFerreira" target="_blank">Profile</a>
+    </div>
+
+    <div class="card">
+      <div class="qr">
+        <img src="assets/qr/linkedin.jpg" alt="LinkedIn QR">
+        <div>LinkedIn QR</div>
+      </div>
+      <br>
+      <div class="qr">
+        <img src="assets/qr/tryhackme.png" alt="TryHackMe QR">
+        <div>TryHackMe QR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Miriam Ferreira
+</footer>
+
 <script>
-  function matrixRain(canvasId){
-    const canvas = document.getElementById(canvasId);
-    const ctx = canvas.getContext("2d");
+/* ===== MATRIX RAIN SCRIPT ===== */
+function matrixRain(id){
+  const canvas = document.getElementById(id);
+  const ctx = canvas.getContext("2d");
 
-    function resize(){
-      canvas.width = canvas.offsetWidth;
-      canvas.height = window.innerHeight;
-    }
+  function resize(){
+    canvas.width = canvas.offsetWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
 
-    resize();
-    window.addEventListener("resize", resize);
+  const fontSize = 16;
+  const columns = Math.floor(canvas.width / fontSize);
+  const drops = Array(columns).fill(1);
 
-    const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
+  function draw(){
+    ctx.fillStyle = "rgba(15,23,42,0.15)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    function draw(){
-      ctx.fillStyle = "rgba(15, 23, 42, 0.08)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(56,189,248,0.9)";
+    ctx.font = fontSize + "px monospace";
 
-      ctx.fillStyle = "rgba(56,189,248,0.9)";
-      ctx.font = fontSize + "px monospace";
+    for(let i=0;i<drops.length;i++){
+      const text = Math.random() > 0.5 ? "1" : "0";
+      ctx.fillText(text, i*fontSize, drops[i]*fontSize);
 
-      for(let i = 0; i < drops.length; i++){
-        const text = Math.random() > 0.5 ? "1" : "0";
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
-          drops[i] = 0;
-        }
-        drops[i]++;
+      if(drops[i]*fontSize > canvas.height && Math.random() > 0.975){
+        drops[i] = 0;
       }
+      drops[i]++;
     }
-
-    setInterval(draw, 50);
   }
 
-  matrixRain("matrix-left");
-  matrixRain("matrix-right");
+  setInterval(draw, 50);
+}
+
+matrixRain("matrix-left");
+matrixRain("matrix-right");
+
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
-
-<body>
-  <canvas id="matrix-left" class="matrix"></canvas>
-  <canvas id="matrix-right" class="matrix"></canvas>
-
-  <!-- Side binary overlays -->
-  <div class="binary binary-left" aria-hidden="true"></div>
-  <div class="binary binary-right" aria-hidden="true"></div>
-
-  <header>
-    <div class="stars"></div>
-    <div class="stars2"></div>
-
-    <h1>Miriam Ferreira</h1>
-    <p>Cybersecurity Student | Smart Technologies Background</p>
-
-    <nav>
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#projects">Projects</a>
-      <a href="#diplomas">Diplomas</a>
-      <a href="#certs">Certifications</a>
-      <a href="#cv">CV</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <div class="card">
-        <p>
-          I am currently studying Cybersecurity after several years focused on industrial programming.
-          I’m looking to deepen my academic and personal knowledge in the IT world, and I aim to continue
-          progressing toward software engineering studies.
-        </p>
-        <p class="muted small" style="margin-top:10px;">
-          Interests: security fundamentals, networks, automation, and hands-on labs.
-        </p>
-      </div>
-    </section>
-
-    <section id="education">
-      <h2>Education</h2>
-      <div class="grid">
-        <div class="card">
-          <p style="margin:0;"><strong>BTS in Cybersecurity</strong></p>
-          <p class="muted" style="margin:6px 0 0 0;">Lycée Guillaume Kroll</p>
-          <p class="muted small" style="margin:6px 0 0 0;">09/2025 — Present</p>
-        </div>
-
-        <div class="card">
-          <p style="margin:0;"><strong>Smart Technologies Technician</strong></p>
-          <p class="muted" style="margin:6px 0 0 0;">Lycée Guillaume Kroll</p>
-          <p class="muted small" style="margin:6px 0 0 0;">09/2020 — 06/2025</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-
-      <div class="card">
-        <p class="project-title">Project 1 — (Add your title)</p>
-        <p class="muted small">What it does, tools used, and what you learned.</p>
-        <div class="btnrow">
-          <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <p class="project-title">Project 2 — (Add your title)</p>
-        <p class="muted small">Short description. Add screenshots later in /assets/img.</p>
-        <div class="btnrow">
-          <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="diplomas">
-      <h2>Diplomas</h2>
-      <div class="card">
-        <ul class="tight small">
-          <li>DT Diploma — Electrotechnical Division, Smart Technologies Section (Robotics & Automation)</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="certs">
-      <h2>Certifications</h2>
-      <div class="card">
-        <ul class="tight small">
-          <li>
-            Microsoft Word (Expert) — Badge
-            • <a href="https://www.credly.com/badges/7e1a77ee-0241-4753-92db-245c201aa2ee/public_url" target="_blank" rel="noopener">Verify</a>
-          </li>
-          <li>
-            Microsoft PowerPoint Associate — Badge
-            • <a href="https://www.credly.com/badges/4030565d-268b-446b-8720-9fad8664cb9a/public_url" target="_blank" rel="noopener">Verify</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="cv">
-      <h2>Curriculum Vitae</h2>
-      <div class="card">
-        <p class="small">
-          French CV (current): <a href="assets/cv/CV_FR.pdf" target="_blank" rel="noopener">Open / Download</a><br/>
-          English CV (coming soon): <span class="muted">assets/cv/CV_EN.pdf</span>
-        </p>
-
-        <div class="btnrow">
-          <a class="btn" href="assets/cv/CV_FR.pdf" target="_blank" rel="noopener">Open CV</a>
-          <a class="btn" href="assets/cv/CV_FR.pdf" download>Download CV</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-
-      <div class="grid">
-        <div class="card">
-          <p class="small" style="margin:0;"><strong>Email</strong></p>
-          <p class="muted small" style="margin:6px 0 0 0;">
-            <a href="mailto:miriambecaferreira@gmail.com">miriambecaferreira@gmail.com</a>
-          </p>
-
-          <p class="small" style="margin:14px 0 0 0;"><strong>GitHub</strong></p>
-          <p class="muted small" style="margin:6px 0 0 0;">
-            <a href="https://github.com/Bequit4" target="_blank" rel="noopener">github.com/Bequit4</a>
-          </p>
-
-          <p class="small" style="margin:14px 0 0 0;"><strong>LinkedIn</strong></p>
-          <p class="muted small" style="margin:6px 0 0 0;">
-            <a href="https://www.linkedin.com/in/miriam-ferreira-3308a4387/" target="_blank" rel="noopener">
-              linkedin.com/in/miriam-ferreira-3308a4387
-            </a>
-          </p>
-
-          <p class="small" style="margin:14px 0 0 0;"><strong>TryHackMe</strong></p>
-          <p class="muted small" style="margin:6px 0 0 0;">
-            <a href="https://tryhackme.com/p/MiriamFerreira" target="_blank" rel="noopener">
-              tryhackme.com/p/MiriamFerreira
-            </a>
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="qr" style="margin-bottom:16px;">
-            <img src="assets/qr/linkedin.jpg" alt="LinkedIn QR Code" />
-            <div>
-              <p style="margin:0;"><strong>LinkedIn QR</strong></p>
-              <p class="muted small" style="margin:6px 0 0 0;">Scan to open my LinkedIn profile.</p>
-            </div>
-          </div>
-
-          <div class="qr">
-            <img src="assets/qr/tryhackme.png" alt="TryHackMe QR Code" />
-            <div>
-              <p style="margin:0;"><strong>TryHackMe QR</strong></p>
-              <p class="muted small" style="margin:6px 0 0 0;">Scan to open my TryHackMe profile.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © <span id="year"></span> Miriam Ferreira
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
