@@ -23,7 +23,67 @@
       line-height: 1.6;
     }
 
-    /* ===== Header with animated starfield (more obvious) ===== */
+    /* ===== Falling binary side effect ===== */
+    .binary{
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.22;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(56,189,248,0.0) 0px,
+          rgba(56,189,248,0.0) 18px,
+          rgba(56,189,248,0.65) 19px,
+          rgba(56,189,248,0.0) 20px
+        );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+      );
+    }
+
+    .binary-left{ left: 0; }
+    .binary-right{ right: 0; }
+
+    .binary::before{
+      content:
+        "01001010100101010100101001010100101001010100101001010100101001"
+        "01010100101001010100101001010100101001010100101001010100101010"
+        "01001010100101010100101001010100101001010100101001010100101001";
+      position: absolute;
+      inset: 0;
+      font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 2px;
+      color: rgba(56,189,248,0.9);
+      white-space: pre-wrap;
+      transform: translateY(-50%);
+      animation: binaryFall 8s linear infinite;
+    }
+
+    .binary-right::before{
+      animation-duration: 11s;
+      opacity: 0.75;
+    }
+
+    @keyframes binaryFall{
+      from { transform: translateY(-60%); }
+      to   { transform: translateY(10%); }
+    }
+
+    @media (max-width: 900px){
+      .binary{ display:none; }
+    }
+
+    /* ===== Header with animated stars ===== */
     header {
       position: relative;
       overflow: hidden;
@@ -35,7 +95,6 @@
         linear-gradient(180deg, #020617, #020617);
     }
 
-    /* Star layer: uses tiny repeated dots so it looks like "real" stars */
     header .stars,
     header .stars2{
       position:absolute;
@@ -49,36 +108,19 @@
       background-image:
         radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.9) 60%, transparent 61%),
         radial-gradient(1px 1px at 140px 80px, rgba(255,255,255,.7) 60%, transparent 61%),
-        radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,.8) 60%, transparent 61%),
-        radial-gradient(1px 1px at 200px 160px, rgba(255,255,255,.6) 60%, transparent 61%),
-        radial-gradient(2px 2px at 40px 170px, rgba(255,255,255,.55) 60%, transparent 61%);
+        radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,.8) 60%, transparent 61%);
       background-size: 240px 200px;
-      opacity: .65;
+      opacity: .6;
       animation: starsDrift 18s linear infinite;
     }
 
     header .stars2{
       background-image:
-        radial-gradient(1px 1px at 60px 40px, rgba(255,255,255,.55) 60%, transparent 61%),
-        radial-gradient(2px 2px at 180px 120px, rgba(255,255,255,.35) 60%, transparent 61%),
-        radial-gradient(1px 1px at 210px 40px, rgba(255,255,255,.45) 60%, transparent 61%),
-        radial-gradient(1px 1px at 110px 180px, rgba(255,255,255,.4) 60%, transparent 61%);
+        radial-gradient(1px 1px at 60px 40px, rgba(255,255,255,.5) 60%, transparent 61%),
+        radial-gradient(2px 2px at 180px 120px, rgba(255,255,255,.35) 60%, transparent 61%);
       background-size: 260px 220px;
       opacity: .35;
       animation: starsDrift2 28s linear infinite;
-    }
-
-    header .nebula{
-      position:absolute;
-      inset:-250px;
-      background:
-        radial-gradient(700px 280px at 20% 10%, rgba(56,189,248,.12), transparent 65%),
-        radial-gradient(800px 320px at 80% 30%, rgba(255,255,255,.06), transparent 70%),
-        radial-gradient(650px 260px at 60% 0%, rgba(148,163,184,.06), transparent 68%);
-      opacity: .85;
-      animation: nebulaShift 14s ease-in-out infinite alternate;
-      pointer-events:none;
-      z-index: 0;
     }
 
     @keyframes starsDrift{
@@ -89,10 +131,6 @@
       from { transform: translateY(0); }
       to   { transform: translateY(260px); }
     }
-    @keyframes nebulaShift{
-      from { transform: translateX(-14px) translateY(0); }
-      to   { transform: translateX(14px) translateY(8px); }
-    }
 
     header h1, header p, nav{
       position: relative;
@@ -102,7 +140,6 @@
     header h1 {
       margin: 0;
       font-size: 2.2rem;
-      letter-spacing: 0.4px;
     }
 
     header p {
@@ -126,7 +163,11 @@
       font-size: 0.95rem;
       background: rgba(255,255,255,0.02);
     }
-    nav a:hover{ border-color: #334155; }
+
+    section, footer{
+      position: relative;
+      z-index: 2;
+    }
 
     section {
       max-width: 960px;
@@ -141,54 +182,13 @@
       font-size: 1.5rem;
     }
 
-    .grid {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 850px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
     .card {
       background: var(--panel);
       padding: 18px;
       border-radius: 10px;
       border: 1px solid var(--border);
+      margin-bottom: 18px;
     }
-
-    .muted{ color: var(--muted); }
-    .small{ font-size: 0.95rem; }
-
-    .project-title {
-      font-weight: bold;
-      font-size: 1.08rem;
-      margin: 0 0 6px 0;
-    }
-
-    a {
-      color: var(--link);
-      text-decoration: none;
-    }
-    a:hover { text-decoration: underline; }
-
-    .btnrow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
-    .btn{
-      display:inline-block;
-      padding: 9px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      text-decoration:none;
-      font-size: 0.95rem;
-    }
-    .btn:hover{ background: rgba(255,255,255,0.06); text-decoration:none; }
 
     .qr{
       display:flex;
@@ -198,36 +198,32 @@
     .qr img{
       width: 120px;
       height: 120px;
-      object-fit: cover;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: #0b1220;
     }
 
-    ul.tight{
-      margin: 0;
-      padding-left: 18px;
-    }
-    ul.tight li{
-      margin: 8px 0;
-    }
+    a { color: var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
 
-    footer {
-      text-align: center;
-      padding: 30px 10px;
-      color: #64748b;
-      border-top: 1px solid var(--border);
-      margin-top: 60px;
+    footer{
+      text-align:center;
+      color:#64748b;
+      padding:30px 10px;
+      border-top:1px solid var(--border);
+      margin-top:60px;
     }
   </style>
 </head>
 
 <body>
 
+<!-- Binary sides -->
+<div class="binary binary-left"></div>
+<div class="binary binary-right"></div>
+
 <header>
   <div class="stars"></div>
   <div class="stars2"></div>
-  <div class="nebula"></div>
 
   <h1>Miriam Ferreira</h1>
   <p>Cybersecurity Student | Smart Technologies Background</p>
@@ -236,164 +232,29 @@
     <a href="#about">About</a>
     <a href="#education">Education</a>
     <a href="#projects">Projects</a>
-    <a href="#diplomas">Diplomas</a>
     <a href="#certs">Certifications</a>
-    <a href="#cv">CV</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
-<section id="about">
-  <h2>About Me</h2>
-  <div class="card">
-    <p>
-      I am currently studying Cybersecurity after several years focused on industrial programming.
-      I’m looking to deepen my academic and personal knowledge in the IT world, and I aim to continue
-      progressing toward software engineering studies.
-    </p>
-    <p class="muted small" style="margin-top:10px;">
-      Interests: security fundamentals, networks, automation, and hands-on labs.
-    </p>
-  </div>
-</section>
-
-<section id="education">
-  <h2>Education</h2>
-
-  <div class="grid">
-    <div class="card">
-      <p style="margin:0;"><strong>BTS in Cybersecurity</strong></p>
-      <p class="muted" style="margin:6px 0 0 0;">Lycée Guillaume Kroll</p>
-      <p class="muted small" style="margin:6px 0 0 0;">09/2025 — Present</p>
-    </div>
-
-    <div class="card">
-      <p style="margin:0;"><strong>Smart Technologies Technician</strong></p>
-      <p class="muted" style="margin:6px 0 0 0;">Lycée Guillaume Kroll</p>
-      <p class="muted small" style="margin:6px 0 0 0;">09/2020 — 06/2025</p>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <h2>Projects</h2>
-
-  <div class="card">
-    <p class="project-title">Project 1 — (Add your title)</p>
-    <p class="muted small">What it does, tools used, and what you learned.</p>
-    <div class="btnrow">
-      <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <p class="project-title">Project 2 — (Add your title)</p>
-    <p class="muted small">Short description. Add screenshots later in /assets/img.</p>
-    <div class="btnrow">
-      <a class="btn" href="https://github.com/Bequit4" target="_blank" rel="noopener">Repository</a>
-    </div>
-  </div>
-</section>
-
-<section id="diplomas">
-  <h2>Diplomas</h2>
-  <div class="card">
-    <ul class="tight small">
-      <li>DT Diploma — Electrotechnical Division, Smart Technologies Section (Robotics & Automation)</li>
-    </ul>
-  </div>
-</section>
-
-<section id="certs">
-  <h2>Certifications</h2>
-  <div class="card">
-    <ul class="tight small">
-      <li>
-        Microsoft Word (Expert) — Badge
-        • <a href="https://www.credly.com/badges/7e1a77ee-0241-4753-92db-245c201aa2ee/public_url" target="_blank" rel="noopener">Verify</a>
-      </li>
-      <li>
-        Microsoft PowerPoint Associate — Badge
-        • <a href="https://www.credly.com/badges/4030565d-268b-446b-8720-9fad8664cb9a/public_url" target="_blank" rel="noopener">Verify</a>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section id="cv">
-  <h2>Curriculum Vitae</h2>
-
-  <div class="card">
-    <p class="small">
-      French CV (current): <a href="assets/cv/CV_FR.pdf" target="_blank" rel="noopener">Open / Download</a><br/>
-      English CV (coming soon): <span class="muted">assets/cv/CV_EN.pdf</span>
-    </p>
-
-    <div class="btnrow">
-      <a class="btn" href="assets/cv/CV_FR.pdf" target="_blank" rel="noopener">Open CV</a>
-      <a class="btn" href="assets/cv/CV_FR.pdf" download>Download CV</a>
-    </div>
-  </div>
-</section>
-
 <section id="contact">
   <h2>Contact</h2>
 
-  <div class="grid">
-    <div class="card">
-      <p class="small" style="margin:0;"><strong>Email</strong></p>
-      <p class="muted small" style="margin:6px 0 0 0;">
-        <a href="mailto:miriambecaferreira@gmail.com">miriambecaferreira@gmail.com</a>
-      </p>
-
-      <p class="small" style="margin:14px 0 0 0;"><strong>GitHub</strong></p>
-      <p class="muted small" style="margin:6px 0 0 0;">
-        <a href="https://github.com/Bequit4" target="_blank" rel="noopener">github.com/Bequit4</a>
-      </p>
-
-      <p class="small" style="margin:14px 0 0 0;"><strong>LinkedIn</strong></p>
-      <p class="muted small" style="margin:6px 0 0 0;">
-        <a href="https://www.linkedin.com/in/miriam-ferreira-3308a4387/" target="_blank" rel="noopener">
-          linkedin.com/in/miriam-ferreira-3308a4387
-        </a>
-      </p>
-
-      <p class="small" style="margin:14px 0 0 0;"><strong>TryHackMe</strong></p>
-      <p class="muted small" style="margin:6px 0 0 0;">
-        <a href="https://tryhackme.com/p/MiriamFerreira" target="_blank" rel="noopener">
+  <div class="card">
+    <div class="qr">
+      <img src="assets/qr/tryhackme.png" alt="TryHackMe QR Code" />
+      <div>
+        <strong>TryHackMe</strong><br/>
+        <a href="https://tryhackme.com/p/MiriamFerreira" target="_blank">
           tryhackme.com/p/MiriamFerreira
         </a>
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="qr" style="margin-bottom:16px;">
-        <img src="assets/qr/linkedin.jpg" alt="LinkedIn QR Code" />
-        <div>
-          <p style="margin:0;"><strong>LinkedIn QR</strong></p>
-          <p class="muted small" style="margin:6px 0 0 0;">Scan to open my LinkedIn profile.</p>
-        </div>
       </div>
-
-      <div class="qr">
-        <img src="assets/qr/tryhackme.jpg" alt="TryHackMe QR Code" />
-        <div>
-          <p style="margin:0;"><strong>TryHackMe QR</strong></p>
-          <p class="muted small" style="margin:6px 0 0 0;">Scan to open my TryHackMe profile.</p>
-        </div>
-      </div>
-
-      <p class="muted small" style="margin-top:14px;">
-        Make sure the filenames match exactly:
-        <br/>assets/qr/linkedin.jpg
-        <br/>assets/qr/tryhackme.jpg
-      </p>
     </div>
   </div>
 </section>
 
 <footer>
-  © <span id="year"></span> Miriam Ferreira — GitHub Pages Portfolio
+  © <span id="year"></span> Miriam Ferreira
 </footer>
 
 <script>
