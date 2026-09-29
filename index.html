@@ -72,130 +72,138 @@
     }
 
     /* ==============================
-       HEADER
-    ============================== */
+   HEADER
+============================== */
 
-    header {
-      position: relative;
-      z-index: 2;
-      overflow: hidden;
+header {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
 
-      padding: 75px 20px 55px;
-      text-align: center;
+  padding: 38px 6%;
 
-      border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 
-      background:
-        linear-gradient(
-          180deg,
-          rgba(3, 16, 29, 0.90),
-          rgba(6, 17, 31, 0.85)
-        );
-    }
+  background:
+    linear-gradient(
+      110deg,
+      rgba(5, 16, 26, 0.97),
+      rgba(10, 27, 39, 0.94)
+    );
+}
 
-    header::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 300px;
+header::after {
+  content: "";
+  position: absolute;
 
-      top: -170px;
-      left: 50%;
-      transform: translateX(-50%);
+  right: 5%;
+  top: -120px;
 
-      background: var(--primary);
-      filter: blur(150px);
-      opacity: 0.12;
+  width: 400px;
+  height: 250px;
 
-      pointer-events: none;
-    }
+  background: var(--primary);
+  filter: blur(150px);
+  opacity: 0.08;
 
-    .header-content {
-      position: relative;
-      z-index: 3;
-    }
+  pointer-events: none;
+}
 
-    .network-label {
-      display: inline-block;
+.header-content {
+  position: relative;
+  z-index: 3;
 
-      margin-bottom: 13px;
-      padding: 5px 13px;
+  max-width: 1200px;
+  margin: auto;
 
-      border: 1px solid rgba(55, 198, 244, 0.35);
-      border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
 
-      color: var(--primary-light);
+.header-identity {
+  flex: 0 0 42%;
+}
 
-      background: rgba(4, 159, 217, 0.07);
+.network-label {
+  display: inline-block;
 
-      font-family: "Courier New", monospace;
-      font-size: 0.78rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
+  margin-bottom: 8px;
 
-    header h1 {
-      margin: 0;
+  color: var(--primary-light);
 
-      font-size: clamp(2.4rem, 6vw, 3.7rem);
-      line-height: 1.1;
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 1.8px;
 
-      color: #ffffff;
+  text-transform: uppercase;
+}
 
-      text-shadow:
-        0 0 25px rgba(4, 159, 217, 0.18);
-    }
+header h1 {
+  margin: 0;
 
-    header p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
+  color: #ffffff;
 
-    /* ==============================
-       NAVIGATION
-    ============================== */
+  font-size: clamp(2.2rem, 4vw, 3.3rem);
+  line-height: 1.05;
 
-    nav {
-      position: relative;
-      z-index: 3;
+  letter-spacing: -1px;
+}
 
-      margin-top: 27px;
+header p {
+  margin: 10px 0 0;
 
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+  color: var(--muted);
 
-    nav a {
-      padding: 8px 15px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
 
-      border: 1px solid var(--border);
-      border-radius: 7px;
+/* ==============================
+   NAVIGATION
+============================== */
 
-      color: var(--text);
-      background: rgba(7, 28, 45, 0.75);
+nav {
+  flex: 1;
 
-      font-size: 0.9rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
-      transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-    }
+  gap: 9px;
+  flex-wrap: wrap;
+}
 
-    nav a:hover {
-      text-decoration: none;
+nav a {
+  padding: 8px 13px;
 
-      border-color: var(--primary);
-      background: rgba(4, 159, 217, 0.12);
+  color: var(--text);
 
-      box-shadow: 0 0 15px var(--glow);
+  border: 1px solid transparent;
+  border-radius: 6px;
 
-      transform: translateY(-2px);
-    }
+  background: transparent;
+
+  font-size: 0.88rem;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+nav a:hover {
+  color: #ffffff;
+
+  border-color: rgba(0, 165, 217, 0.45);
+
+  background: rgba(0, 165, 217, 0.08);
+
+  transform: translateY(-1px);
+}
 
     /* ==============================
        MAIN CONTENT
@@ -431,14 +439,29 @@
     ============================== */
 
     @media (max-width: 850px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
 
-      header {
-        padding-top: 60px;
-      }
-    }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    padding: 32px 22px;
+  }
+
+  .header-content {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .header-identity {
+    flex: auto;
+  }
+
+  nav {
+    justify-content: flex-start;
+  }
+}
 
     @media (max-width: 550px) {
       header {
@@ -499,17 +522,22 @@
 <canvas id="network-background"></canvas>
 
 <header>
+
   <div class="header-content">
 
-    <div class="network-label">
-      NETWORKING • IT • TECHNOLOGY
+    <div class="header-identity">
+
+      <div class="network-label">
+        NETWORKING • IT • TECHNOLOGY
+      </div>
+
+      <h1>Miriam Ferreira</h1>
+
+      <p>
+        Cisco Networking Learner | Smart Technologies Background
+      </p>
+
     </div>
-
-    <h1>Miriam Ferreira</h1>
-
-    <p>
-      Cybersecurity Student | Smart Technologies Background
-    </p>
 
     <nav>
       <a href="#about">About</a>
@@ -522,6 +550,7 @@
     </nav>
 
   </div>
+
 </header>
 
 
